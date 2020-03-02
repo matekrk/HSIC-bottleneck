@@ -20,6 +20,7 @@ run_plot -t varied-depth -dc mnist -e $ftype
 run_plot -t hsic-solve -dc mnist -e $ftype
 run_plot -t hsic-solve -dc fmnist -e $ftype
 run_plot -t hsic-solve -dc cifar10 -e $ftype
+run_plot -t hsic-solve -dc synthetic -e $ftype
 
 # # fig5: format-training with different hsic-trained network
 run_plot -t varied-epoch -dc mnist -e $ftype

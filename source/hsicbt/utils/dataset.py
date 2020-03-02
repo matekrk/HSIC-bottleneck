@@ -1,4 +1,5 @@
 from .. import *
+import pandas as pd
 
 
 def get_dataset_from_code(code, batch_size):
@@ -19,6 +20,9 @@ def get_dataset_from_code(code, batch_size):
     elif code == 'fmnist':
         train_loader, test_loader = get_fasionmnist_data(batch_size=batch_size,
             data_folder_path=os.path.join(dataset_root, 'fasionmnist-data'))
+    elif code == 'synthetic':
+        train_loader, test_loader = get_synthetic_data(batch_size=batch_size,
+            data_path=os.path.join(dataset_root,'synthetic_data_distributions.csv'))
     else:
         raise ValueError("Unknown data type : [{}] Impulse Exists".format(data_name))
 
@@ -103,5 +107,40 @@ def get_cifar10_data(data_folder_path, batch_size=64):
         batch_size=batch_size, shuffle=False, **kwargs)
     test_loader  = torch.utils.data.DataLoader(test_data, 
         batch_size=batch_size, shuffle=False, **kwargs)
+
+    return train_loader, test_loader
+
+def get_synthetic_data(data_path, batch_size=64):
+    """ Synthetic distribution data
+    Args:
+        train_batch_size(int): training batch size 
+        test_batch_size(int): test batch size
+    Returns:
+        (torch.utils.data.DataLoader): train loader 
+        (torch.utils.data.DataLoader): test loader
+    """
+
+    training = pd.load_csv(data_path).values
+
+    # pick your indices for sample 1 and sample 2:
+    s1 = np.random.choice(range(training.shape[0]), int(0.9*training.shape[0]), replace=False)
+    s2 = list(set(range(training.shape[0])) - set(s1))
+    # extract your samples:
+    train_data = torch.as_tensor(training[s1, :-1])
+    y_train_data = torch.astensor(training[s1, -1])
+    test_data = torch.as_tensor(training[s2, :-1])
+    y_test_data = torch.astensor(training[s2, -1])
+
+    # one hot
+    n = 11
+    y_train_data_one_hot = torch.nn.functional.one_hot(y_train_data.to(torch.int64), n)
+    y_test_data_one_hot = torch.nn.functional.one_hot(y_test_data.to(torch.int64), n)
+
+    # create dataset and dataloaders
+    train_dataset = torch.utils.data.TensorDataset(train_data, y_train_data_one_hot)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64)
+
+    test_dataset = torch.utils.data.TensorDataset(test_data, y_test_data_one_hot)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64)
 
     return train_loader, test_loader

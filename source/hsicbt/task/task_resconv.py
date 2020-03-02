@@ -47,6 +47,8 @@ def plot_resconv_result(config_dict):
         log_backprop_cifar10 = load_logs(get_log_filepath(config_dict['task'], TTYPE_STANDARD , 'cifar10'))
         log_format_fmnist    = load_logs(get_log_filepath(config_dict['task'], TTYPE_FORMAT,    'fmnist' ))        
         log_backprop_fmnist  = load_logs(get_log_filepath(config_dict['task'], TTYPE_STANDARD , 'fmnist' ))
+        log_format_synthetic   = load_logs(get_log_filepath(config_dict['task'], TTYPE_FORMAT,    'synthetic'))        
+        log_backprop_synthetic = load_logs(get_log_filepath(config_dict['task'], TTYPE_STANDARD , 'synthetic'))
                         
     except IOError as e:
         print_highlight("{}.\nNo plot produced unless all backprop/format training has been done. (by altering \'training_type\' in config)".format(e), 'red')
@@ -56,7 +58,9 @@ def plot_resconv_result(config_dict):
     config_dict['data_code'] = 'cifar10'
     plot_each_resconv_result(log_format_cifar10, log_backprop_cifar10, config_dict['ext'], 'fig7b', config_dict)
     config_dict['data_code'] = 'fmnist'    
-    plot_each_resconv_result(log_format_fmnist, log_backprop_fmnist, config_dict['ext'], 'fig7c', config_dict)        
+    plot_each_resconv_result(log_format_fmnist, log_backprop_fmnist, config_dict['ext'], 'fig7c', config_dict)      
+    config_dict['data_code'] = 'synthetic'    
+    plot_each_resconv_result(log_format_synthetic, log_backprop_synthetic, config_dict['ext'], 'fig7d', config_dict)      
 
 def task_resconv_func(config_dict):
     func = task_assigner(config_dict['training_type'])

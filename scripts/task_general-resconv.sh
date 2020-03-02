@@ -13,6 +13,7 @@
 # task_general-resconv.sh -d cifar10 -e 50 -t 1
 # task_general-resconv.sh -d mnist   -e 30 -t 1
 # task_general-resconv.sh -d fmnist  -e 50 -t 1
+# task_general-resconv.sh -d synthetic -e 30 -t 1
 
 
 

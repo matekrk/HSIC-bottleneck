@@ -29,6 +29,8 @@ class ModelConv(nn.Module):
             dim = 960
         elif data_code == 'fmnist':
             dim = 128
+        elif data_code == 'synthetic':
+            dim = 128
             
         self.output_layer   = makeblock_dense(dim, last_hw, atype)
 
