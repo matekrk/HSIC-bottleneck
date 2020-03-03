@@ -32,10 +32,10 @@ echo ${datacode} ${epochs} ${istrainhsic}
 
 if [ $istrainhsic -eq 1 ]
 then
-   run_hsicbt -cfg config/general-hsicbt.yaml -tt hsictrain -m resnet-conv -dc ${datacode} -d 15 -ep ${epochs} -lr 0.0001 -lhw 512 -mf hsic_weight_resnetc_${datacode}.pt -vb
+   ../bin/run_hsicbt -cfg ../config/general-hsicbt.yaml -tt hsictrain -m resnet-conv -dc ${datacode} -d 15 -ep ${epochs} -lr 0.0001 -lhw 512 -mf hsic_weight_resnetc_${datacode}.pt -vb
 fi
 
 # fmnist
-run_hsicbt -cfg config/general-format.yaml   -tt format    -m resnet-conv -dc ${datacode} -d 15 -ep 5 -lr 0.0025 -lhw 512 -mf hsic_weight_resnetc_${datacode}.pt 
-run_hsicbt -cfg config/general-backprop.yaml -tt backprop  -m resnet-conv -dc ${datacode} -d 15 -ep 5 -lr 0.0025 -lhw 512
-run_plot -t general -dc ${datacode} -e pdf
+../bin/run_hsicbt -cfg ../config/general-format.yaml   -tt format    -m resnet-conv -dc ${datacode} -d 15 -ep 5 -lr 0.0025 -lhw 512 -mf hsic_weight_resnetc_${datacode}.pt 
+../bin/run_hsicbt -cfg ../config/general-backprop.yaml -tt backprop  -m resnet-conv -dc ${datacode} -d 15 -ep 5 -lr 0.0025 -lhw 512
+../bin/run_plot -t general -dc ${datacode} -e pdf

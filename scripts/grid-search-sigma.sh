@@ -32,9 +32,9 @@ do
             export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"`
 
             # # # for grid-searching unformat-training
-            run_hsicbt -cfg config/general-hsicbt.yaml \
+            ../bin/run_hsicbt -cfg ../config/general-hsicbt.yaml \
                        -tt ${t_type} -ep ${n_epoch} -s ${p_s} -ld ${p_l} -lr ${p_lr} -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth}
-            run_hsicbt -cfg config/general-format.yaml -ep 1
+            ../bin/run_hsicbt -cfg ../config/general-format.yaml -ep 1
             
         done
     done

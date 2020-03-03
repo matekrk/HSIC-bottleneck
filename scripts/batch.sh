@@ -5,30 +5,32 @@
 #	please see config/README.md for more information
 # # # # # # # # # # # # # # # 
 
+python --version
+
 # genernal
-task_general.sh
+./task_general.sh
 
 # fig2a-c
-task_varied-act.sh
+./task_varied-act.sh
 
 # fig2d-f
-task_varied-depth.sh
+./task_varied-depth.sh
 
 # fig3-4
-task_hsicsolve-beta.sh
+./task_hsicsolve-beta.sh
 
 # fig5-ab
-task_varied-ep.sh
+./task_varied-ep.sh
 
 # fig6a
-task_varied-dim.sh
+./task_varied-dim.sh
 
-# fig6b
+./# fig6b
 task_combsig.sh
 
 # fig7
-task_resconv.sh
+./task_resconv.sh
 
 # fig8
-task_needle.sh
+./task_needle.sh
 

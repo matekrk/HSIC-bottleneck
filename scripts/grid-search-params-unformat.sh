@@ -33,7 +33,7 @@ do
             export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"`
 
             # # # for grid-searching unformat-training
-            run_hsicbt -cfg config/hsicsolve-beta.yaml \
+            ../bin/run_hsicbt -cfg ../config/hsicsolve-beta.yaml \
                        -tt ${t_type} -ep ${n_epoch} -s ${p_s} -ld ${p_l} -lr ${p_lr} -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth}
             
         done

@@ -34,12 +34,12 @@ do
             
             export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"` 
             # # # for grid-searching resnet (HSIC-training first then format training), adding -vb for verbosing the network architecture
-            run_hsicbt -cfg config/resconv-hsicbt.yaml -mf hsic_weight_resconv_${t_data}.pt \
+            ../bin/run_hsicbt -cfg ../config/resconv-hsicbt.yaml -mf hsic_weight_resconv_${t_data}.pt \
                        -tt hsictrain -ep ${n_epoch} -s ${p_s} -ld ${p_l} -lr ${p_lr} \
                        -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth} -d ${n_kernels}
 
             # # # and we evalute at format-training only 1 epoch, adding -vb for verbosing the network architecture
-            run_hsicbt -cfg config/resconv-format.yaml -mf hsic_weight_resconv_${t_data}.pt -dc ${t_data} \
+            ../bin/run_hsicbt -cfg ../config/resconv-format.yaml -mf hsic_weight_resconv_${t_data}.pt -dc ${t_data} \
                        -tt format -ep 1 -s ${p_s} -ld ${p_l} -lr 0.1 -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth} -d ${n_kernels}
 
         done
@@ -52,7 +52,7 @@ done
 # p_learningrate=(0.1)
 # for p_lr in ${p_learningrate[@]}
 # do
-#     run_hsicbt -cfg config/resconv-backprop.yaml -mf hsic_weight_resconv_${t_data}.pt -dc ${t_data} \
+#     ../bin/run_hsicbt -cfg ../config/resconv-backprop.yaml -mf hsic_weight_resconv_${t_data}.pt -dc ${t_data} \
     #                -tt backprop -ep 1 -lr ${p_learningrate} -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth} -d ${n_kernels}
 # done
 
@@ -61,6 +61,6 @@ done
 # for i in  $(seq -f "%04g" 1 49)
 # do
 #     echo ${i}
-#     run_hsicbt -cfg config/resconv-format.yaml -mf raw/161019_185352_hsic_weight_resconv_${t_data}-${i}.pt -dc ${t_data} \
+#     ../bin/run_hsicbt -cfg ../config/resconv-format.yaml -mf raw/161019_185352_hsic_weight_resconv_${t_data}-${i}.pt -dc ${t_data} \
     #                -tt format -ep 3 -s 1 -ld 1 -lr 0.1 -dc ${t_data} -bs ${p_batchsize} -dt ${p_depth}
 # done

@@ -24,7 +24,7 @@ def get_dataset_from_code(code, batch_size):
         train_loader, test_loader = get_synthetic_data(batch_size=batch_size,
             data_path=os.path.join(dataset_root,'synthetic_data_distributions.csv'))
     else:
-        raise ValueError("Unknown data type : [{}] Impulse Exists".format(data_name))
+        raise ValueError("Unknown data type : [{}] Impulse Exists".format(code))
 
     return train_loader, test_loader
 
